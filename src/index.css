@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Emblema+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Emblema+One&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 @import "tailwindcss";
 
@@ -19,9 +20,9 @@
 
 .dark {
   color-scheme: dark;
-  --page: #0f1117;
+  --page: #000000;
   --body: #9ca3af;
-  --heading: #f3f4f6;
+  --heading: #ffffff;
   --line: #222225;
   --accent: #c084fc;
   --text-body: white;
@@ -31,7 +32,8 @@
 /* 3. Turn the variables into Tailwind classes */
 @theme inline {
   --font-emblema: "Emblema One", serif;
-  --font-roboto: "Robot", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --font-google-sans: "Google Sans", sans-serif;
 
   --color-page: var(--page);
   --color-body: var(--body);
