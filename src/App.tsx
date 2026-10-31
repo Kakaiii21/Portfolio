@@ -3,6 +3,7 @@ import { FileUser, MoveRight, Mail, ArrowUpRight } from "lucide-react";
 import GitHubActivity from "./components/GitHubActivity";
 import { useTheme } from "./components/useTheme";
 import type { IconType } from "react-icons";
+import Contact from "./components/Contact";
 import {
   FaGithub, FaLinkedin, FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs,
   FaPhp, FaMobileAlt, FaServer, FaGitAlt, FaFigma,
@@ -153,7 +154,7 @@ const projects: Project[] = [
 ];
 
 const footerLinkClass =
-  "inline-flex items-center gap-2 rounded-lg bg-line px-4 py-2 text-sm font-bold text-text-body transition-transform duration-200 hover:-translate-y-0.5";
+  "inline-flex items-center gap-2 hover:text-green-500 rounded-lg bg-line px-4 py-2 text-sm font-bold text-text-body transition-transform duration-200 hover:-translate-y-0.5";
 
 function App() {
   const { theme, toggle } = useTheme();
@@ -186,7 +187,7 @@ function App() {
             </p>
 
             <div className="mt-6 lg:mt-10 flex flex-wrap justify-center md:justify-start items-center gap-3">
-              <button className="hover:cursor-pointer inline-flex items-center gap-2 text-base lg:text-lg py-1 px-3 bg-heading border border-heading font-normal rounded-full font-google-sans text-page">
+              <button className="hover:cursor-pointer inline-flex items-center gap-2 hover:text-green-500 text-base lg:text-lg py-1 px-3 bg-heading border border-heading font-normal rounded-full font-google-sans text-page">
                 Get in touch
                 <MoveRight size={19} />
               </button>
@@ -194,7 +195,7 @@ function App() {
               <a
                 href="/resume.pdf"
                 download="Casey-Resume.pdf"
-                className="group relative hover:bg-body hover:cursor-pointer inline-flex items-center gap-2 text-base lg:text-lg py-1 px-3 bg-transparent border border-text-body font-google-sans font-normal rounded-full"
+                className="group relative hover:bg-body hover:cursor-pointer inline-flex items-center hover:text-green-500 gap-2 text-base lg:text-lg py-1 px-3 bg-transparent border border-text-body font-google-sans font-normal rounded-full"
               >
                 <FileUser size={19} />
                 Resume/CV
@@ -341,7 +342,7 @@ function App() {
       </div>
 
       {/* Projects Section */}
-      <div className="border border-line py-8 lg:py-16 flex flex-col mx-2 lg:mx-0">
+      <div id="projects" className="border border-line py-8 lg:py-16 flex flex-col mx-2 lg:mx-0">
         <div className="mx-2 mt-5 lg:mx-24 font-roboto">
           <p className="text-body">Projects</p>
           <p className="text-text-body lg:text-2xl font-google-sans font-bold">
@@ -349,7 +350,7 @@ function App() {
           </p>
         </div>
 
-        <div className="mt-6 mx-2 lg:mx-24 lg:justify-evenly flex flex-col lg:flex-row lg:flex-wrap gap-4">
+        <div className="mt-6 mx-2  lg:mx-24 lg:justify-evenly flex flex-col lg:flex-row lg:flex-wrap gap-4">
           {projects.map(({ title, description, image, url, github, label, tech }) => (
             <div key={title} className="flex flex-col overflow-hidden rounded-2xl border border-line lg:w-sm">
               {/* Preview */}
@@ -421,7 +422,7 @@ function App() {
 
                 {/* Footer */}
                 <div className="mt-auto flex items-center justify-between border-t border-line pt-4">
-                  <p className="text-sm text-body">{label}</p>
+                  <p className="text-sm  text-body">{label}</p>
                   {url ? (
                     <a href={url} target="_blank" rel="noreferrer" className={footerLinkClass}>
                       View Site
@@ -441,6 +442,9 @@ function App() {
           ))}
         </div>
       </div>
+
+      {/* Contact Section */}
+      <Contact  />
     </>
   );
 }
