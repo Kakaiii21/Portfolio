@@ -1,5 +1,5 @@
 import Topbar from "./components/Topbar";
-import { FileUser, MoveRight, Mail } from "lucide-react";
+import { FileUser, MoveRight, Mail, ArrowUpRight } from "lucide-react";
 import GitHubActivity from "./components/GitHubActivity";
 import { useTheme } from "./components/useTheme";
 import type { IconType } from "react-icons";
@@ -80,7 +80,6 @@ const skillGroups: SkillGroup[] = [
       { name: "VS Code", Icon: VscVscode, color: "#007ACC", level: "Comfortable" },
       { name: "Figma", Icon: FaFigma, color: "#F24E1E", level: "Comfortable" },
       { name: "phpMyAdmin", Icon: SiPhpmyadmin, color: "#6C78AF", level: "Familiar" },
-
     ],
   },
   {
@@ -99,6 +98,62 @@ const skillGroups: SkillGroup[] = [
     items: [{ name: "Filipino" }, { name: "English" }],
   },
 ];
+
+type Project = {
+  title: string;
+  description: string;
+  image?: string;
+  url?: string;
+  github?: string;
+  label?: string;
+  tech: string[];
+};
+
+const projects: Project[] = [
+  {
+    title: "Study Buddy",
+    description:
+      "A Progressive Web Application for self-regulated learning. Uses GroqAI to generate flashcards and quizzes for students.",
+    image: "/study-buddy.jpg",
+    url: "https://studybuddy.query-quest.site/",
+    github: "https://github.com/Kakaiii21/Study-Buddy-Capstone",
+    label: "Capstone Project",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Firebase", "Node.js", "Express", "Groq AI", "PWA", "HTML", "CSS", "JavaScript", "Hostinger"],
+  },
+  {
+    title: "EduJournal",
+    description: "A web app built with PHP, HTML, CSS and JavaScript for website dev subject",
+    github: "https://github.com/Kakaiii21/EduJournal",
+    label: "School Project",
+    tech: ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
+  },
+  {
+    title: "Moodify",
+    description: "An Mobile Application With music player, notes, weather,",
+    github: "https://github.com/Kakaiii21/Moodify",
+    label: "School Project",
+    tech: ["Flutter","Dart","Firebase","Open Weather"],
+  },
+  {
+    title: "LITTLE EXPLORERS",
+    description: "Little Explorer: An E-Learning Android Application for Children as part of the requirements in the subject called IT 44 - Systems Analysis Design",
+    github: "https://github.com/Kakaiii21/The-Little-Explorer",
+    label: "School Project",
+    tech: ["Flutter","Dart","Firebase"],
+  },
+  // {
+  //   title: "",
+  //   description: "",
+  //   image: "",
+  //   url: "",
+  //   github: "",
+  //   label: "",
+  //   tech: [],
+  // },
+];
+
+const footerLinkClass =
+  "inline-flex items-center gap-2 rounded-lg bg-line px-4 py-2 text-sm font-bold text-text-body transition-transform duration-200 hover:-translate-y-0.5";
 
 function App() {
   const { theme, toggle } = useTheme();
@@ -219,7 +274,7 @@ function App() {
       </div>
 
       {/* About Me Section */}
-      <div className="w-full h-full border border-line py-8 lg:py-16 flex mx-2 lg:mx-0">
+      <div className="border border-line py-8 lg:py-16 flex mx-2 lg:mx-0">
         <div className="mx-2 mt-5 lg:mx-24 font-roboto">
           <p className="text-body">About</p>
           <p className="text-text-body lg:text-2xl font-google-sans font-bold">About Me</p>
@@ -232,7 +287,7 @@ function App() {
       </div>
 
       {/* Skills And Tools Section */}
-      <div className="w-full h-full border border-line py-8 lg:py-16 flex mx-2 lg:mx-0">
+      <div className="border border-line py-8 lg:py-16 flex mx-2 lg:mx-0">
         <div className="flex-1 mx-2 mt-5 lg:mx-24 font-roboto">
           <p className="text-body">Skills</p>
           <p className="text-text-body lg:text-2xl font-google-sans font-bold">
@@ -282,6 +337,108 @@ function App() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Projects Section */}
+      <div className="border border-line py-8 lg:py-16 flex flex-col mx-2 lg:mx-0">
+        <div className="mx-2 mt-5 lg:mx-24 font-roboto">
+          <p className="text-body">Projects</p>
+          <p className="text-text-body lg:text-2xl font-google-sans font-bold">
+            Personal & School Projects
+          </p>
+        </div>
+
+        <div className="mt-6 mx-2 lg:mx-24 lg:justify-evenly flex flex-col lg:flex-row lg:flex-wrap gap-4">
+          {projects.map(({ title, description, image, url, github, label, tech }) => (
+            <div key={title} className="flex flex-col overflow-hidden rounded-2xl border border-line lg:w-sm">
+              {/* Preview */}
+              <div className="relative h-56 lg:h-48 overflow-hidden border-b border-line bg-line">
+                {image ? (
+                  <img
+                    src={image}
+                    alt={`${title} screenshot`}
+                    className="h-full w-full object-cover object-top"
+                  />
+                ) : (
+                  url && (
+                    <iframe
+                      src={url}
+                      title={`${title} live preview`}
+                      loading="lazy"
+                      tabIndex={-1}
+                      className="pointer-events-none h-full w-full border-0 bg-page"
+                    />
+                  )
+                )}
+
+                <span className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full border border-line bg-page/80 px-3 py-1 text-xs font-bold uppercase tracking-wide text-text-body backdrop-blur">
+                  <span className="h-2 w-2 rounded-full bg-[#26A641]" />
+                  Project
+                </span>
+
+              {image ? (
+                <img
+                  src={image}
+                  alt={`${title} screenshot`}
+                  className="h-full w-full object-cover object-top"
+                />
+              ) : url ? (
+                <iframe
+                  src={url}
+                  title={`${title} live preview`}
+                  loading="lazy"
+                  tabIndex={-1}
+                  className="pointer-events-none h-full w-full border-0 bg-page"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-line px-6 text-center">
+                  <span className="font-roboto text-3xl font-bold text-body">{title}</span>
+                </div>
+              )}
+              </div>
+
+              {/* Body */}
+              <div className="flex flex-1 flex-col p-4">
+                <p className="font-roboto text-lg font-bold text-text-body">{title}</p>
+                <p className="mt-2 line-clamp-2 text-body">{description}</p>
+
+                <div className="mb-5 mt-4 flex flex-wrap gap-2">
+                  {tech.slice(0, 4).map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center rounded-full border border-line px-3 py-1 text-sm text-text-body transition-transform duration-200 hover:-translate-y-1"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                  {tech.length > 4 && (
+                    <span className="inline-flex items-center px-1 text-sm text-body">
+                      +{tech.length - 4}
+                    </span>
+                  )}
+                </div>
+
+                {/* Footer */}
+                <div className="mt-auto flex items-center justify-between border-t border-line pt-4">
+                  <p className="text-sm text-body">{label}</p>
+                  {url ? (
+                    <a href={url} target="_blank" rel="noreferrer" className={footerLinkClass}>
+                      View Site
+                      <ArrowUpRight size={16} />
+                    </a>
+                  ) : (
+                    github && (
+                      <a href={github} target="_blank" rel="noreferrer" className={footerLinkClass}>
+                        Source Code
+                        <ArrowUpRight size={16} />
+                      </a>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </>
