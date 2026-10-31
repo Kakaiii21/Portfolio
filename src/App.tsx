@@ -1,12 +1,17 @@
 import Topbar from "./components/Topbar";
 import { FileUser, MoveRight, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import GitHubActivity from "./components/GitHubActivity";
+import { useTheme } from "./components/useTheme";
 
 function App() {
+  const {theme, toggle} = useTheme();
   return (
+
     <>
-      <Topbar />
+      <Topbar theme={theme} toggle={toggle} />
       <main className="min-h-screen p-4 sm:p-8 border border-line">
+        {/* TOP NAME */}
         <div className="flex flex-col md:flex-row justify-center items-center mt-6 md:mt-10 gap-6 md:gap-10 text-text-body">
           <div>
             <img
@@ -104,6 +109,12 @@ function App() {
               </div>
             </div>
           </div>
+        </div>
+        <div className=" mt-10 mx-2 lg:mt-20 lg:mx-16 font-roboto">
+          <p className="text-body">Featured</p>
+          <p className="text-text-body lg:text-2xl font-google-sans font-bold">GitHub Activity</p>
+          <GitHubActivity theme={theme} 
+          />
         </div>
       </main>
     </>

@@ -1,6 +1,11 @@
-import { useTheme } from "./useTheme";
-function Topbar() {
-const { theme, toggle } = useTheme();
+import type { Theme } from "./useTheme";
+
+type TopbarProps = {
+  theme: Theme;
+  toggle: () => void;
+};
+
+function Topbar({ theme, toggle }: TopbarProps) {
 
   return (
     <div className="border flex border-line justify-between px-3 lg:px-10 text-text-body font-roboto items-center h-20">
