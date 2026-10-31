@@ -10,7 +10,7 @@ function App() {
 
     <>
       <Topbar theme={theme} toggle={toggle} />
-      <main className="min-h-screen p-4 sm:p-8 border border-line">
+      <div className="h-auto p-0 sm:p-8 border border-line mx-2 lg:mx-0">
         {/* TOP NAME */}
         <div className="flex flex-col md:flex-row justify-center items-center mt-6 md:mt-10 gap-6 md:gap-10 text-text-body">
           <div>
@@ -110,13 +110,28 @@ function App() {
             </div>
           </div>
         </div>
+        {/* GitHub Activity */}
         <div className=" mt-10 mx-2 lg:mt-20 lg:mx-16 font-roboto">
           <p className="text-body">Featured</p>
           <p className="text-text-body lg:text-2xl font-google-sans font-bold">GitHub Activity</p>
           <GitHubActivity theme={theme} 
           />
         </div>
-      </main>
+      </div>
+      {/* About Me Section */}
+      <div className="w-full h-full border border-line py-8 lg:py-16 flex mx-2 lg:mx-0">
+        <div className="mx-2 mt-5 lg:mx-24 font-roboto">
+          <p className="text-body">About</p>
+          <p className="text-text-body lg:text-2xl font-google-sans font-bold">About Me</p>
+          <div className="mt-6 space-y-10">
+            <p>I'm currently a 4th-year Bachelor of Science in Information Technology student who is interested in exploring the world of web development.</p>
+            <p>I enjoy learning how websites and web applications work, from creating user-friendly interfaces to understanding the logic and systems behind them. I'm currently developing my skills in both frontend and backend technologies and looking forward to discovering more along the way.</p>
+            <p>As someone who is still beginning my journey in the field, I believe that every project and learning opportunity is a chance to grow. I'm open to learning new technologies, gaining hands-on experience, and improving my abilities as I work toward becoming a well-rounded web developer.</p>
+          </div>
+        </div>          
+      </div>
+
+
     </>
   );
 }
