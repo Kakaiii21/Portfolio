@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Emblema+One&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "tailwindcss";
+
+
+/* 1. Tell Tailwind: "dark:" applies when a parent has the .dark class */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 2. Your color palette, as CSS variables */
+:root {
+  color-scheme: light;
+  --page: #ffffff;
+  --body: #4b5563;
+  --heading: #111827;
+  --line: #e5e7eb;
+  --accent: #7c3aed;
+  --text-body: #0f1117;
+}
+
+.dark {
+  color-scheme: dark;
+  --page: #0f1117;
+  --body: #9ca3af;
+  --heading: #f3f4f6;
+  --line: #222225;
+  --accent: #c084fc;
+  --text-body: white;
+
+}
+
+/* 3. Turn the variables into Tailwind classes */
+@theme inline {
+  --font-emblema: "Emblema One", serif;
+  --font-roboto: "Robot", sans-serif;
+
+  --color-page: var(--page);
+  --color-body: var(--body);
+  --color-heading: var(--heading);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-text-body: var(--text-body);
+}
+
+body {
+  @apply bg-page text-body antialiased;
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  max-width: 1126px;
+  min-height: 100vh;
+  margin: 0 auto;
+
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+
+  box-sizing: border-box;
+}
