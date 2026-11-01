@@ -1,7 +1,10 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { Mail, MapPin, Send } from "lucide-react";
+import Reveal from "./Reveal";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import AnimatedButton from "./AnimatedButton";
+import {motion} from "motion/react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -9,7 +12,7 @@ const inputClass =
   "w-full rounded-lg border border-line bg-transparent px-4 py-3 text-text-body placeholder:text-body/60 transition-colors focus:border-[#26A641] focus:outline-none";
 
 const iconLinkClass =
-  "inline-flex h-9 w-9 items-center justify-center rounded-full border border-text-body text-text-body hover:bg-body hover:cursor-pointer";
+  "inline-flex h-9 w-9 items-center justify-center rounded-full border border-text-body text-text-body  hover:cursor-pointer";
 
 function Contact() {
   const [status, setStatus] = useState<Status>("idle");
@@ -52,28 +55,35 @@ function Contact() {
   return (
     <div id="contact" className="border border-line py-8  lg:py-16 flex flex-col mx-2 lg:mx-0">
       <div className="mx-2 mt-5 lg:mx-24 font-roboto">
-        <p className="text-body">Contact</p>
-        <p className="text-text-body lg:text-2xl font-google-sans font-bold">
+        <Reveal><p className="text-body">Contact</p></Reveal>
+        <Reveal><p className="text-text-body lg:text-2xl font-google-sans font-bold">
           Let's build something.
-        </p>
+        </p></Reveal>
       </div>
 
       <div className="mx-2 mt-8 flex flex-col gap-8 lg:mx-24 lg:flex-row lg:gap-12">
         {/* Left: info */}
         <div className="flex flex-col gap-6 font-roboto lg:w-2/5">
-          <p className="inline-flex w-fit items-center gap-2 rounded-full border border-line px-3 py-1 text-sm text-text-body">
+          <Reveal><motion.p
+            animate={{scale:[1,1.05,1]}}
+            transition={{duration:1.2,
+              repeat: Infinity,
+              repeatDelay:2,
+              repeatType: "reverse"
+            }}
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-line px-3 py-1 text-sm text-text-body">
             <span className="h-2 w-2 rounded-full bg-[#26A641]" />
             Open to opportunities
-          </p>
+          </motion.p></Reveal>
 
-          <p className="text-body">
+          <Reveal><p className="text-body">
             Open to full-time roles, contract work, and ambitious side projects. Tell me what
             you're shipping.
-          </p>
+          </p></Reveal>
 
           <ul className="space-y-3 text-text-body">
             <li>
-              <a
+              <Reveal><a
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=caseypdellamas@gmail.com"
                 target="_blank"
                 rel="noreferrer"
@@ -81,21 +91,29 @@ function Contact() {
               >
                 <Mail size={18} />
                 caseypdellamas@gmail.com
-              </a>
+              </a></Reveal>
             </li>
-            <li className="inline-flex items-center gap-3">
+            <Reveal><li className="inline-flex items-center gap-3">
               <MapPin size={18} />
               Manila, Philippines
-            </li>
+            </li></Reveal>
           </ul>
 
           <div className="flex gap-3">
-            <a href="https://github.com/Kakaiii21" target="_blank" rel="noreferrer" aria-label="GitHub" className={iconLinkClass}>
+            <Reveal><motion.a
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.9, y: 1 }}
+              transition={{ type: "spring", stiffness:300, damping: 15 }}
+              href="https://github.com/Kakaiii21" target="_blank" rel="noreferrer" aria-label="GitHub" className={iconLinkClass}>
               <FaGithub size={18} />
-            </a>
-            <a href="https://www.linkedin.com/in/casey-undefined-396b62446/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className={iconLinkClass}>
+            </motion.a></Reveal>
+            <Reveal><motion.a
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.9, y: 1 }}
+              transition={{ type: "spring", stiffness:300, damping: 15 }}
+              href="https://www.linkedin.com/in/casey-undefined-396b62446/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className={iconLinkClass}>
               <FaLinkedin size={18} />
-            </a>
+            </motion.a></Reveal>
           </div>
           
         </div>
@@ -105,7 +123,7 @@ function Contact() {
           className="flex-1 space-y-5 rounded-2xl border border-line p-5 font-roboto sm:p-6"
         >
           <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
-
+        <Reveal>
           <div>
             <label htmlFor="name" className="mb-2 block text-sm text-body">Name</label>
             <input id="name" name="name" type="text" required placeholder="Your name" className={inputClass} />
@@ -127,15 +145,15 @@ function Contact() {
               {status === "error" && "Something went wrong. Please try again, or email me directly."}
             </p>
 
-            <button
+            <AnimatedButton
               type="submit"
               disabled={status === "sending"}
-              className="inline-flex hover:text-green-500 items-center gap-2 rounded-full border border-heading bg-heading px-5 py-2 font-google-sans text-page hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex mt-4 hover:text-green-500 items-center gap-2 rounded-full border border-heading bg-heading px-5 py-2 font-google-sans text-page hover:cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
             >
               {status === "sending" ? "Sending..." : "Send message"}
               <Send size={16} />
-            </button>
-          </div>
+            </AnimatedButton>
+          </div></Reveal>
         </form>
 
       </div>

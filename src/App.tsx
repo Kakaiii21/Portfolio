@@ -5,6 +5,7 @@ import { useTheme } from "./components/useTheme";
 import type { IconType } from "react-icons";
 import Contact from "./components/Contact";
 import {motion} from "motion/react";
+import Reveal from "./components/Reveal";
 import {
   FaGithub, FaLinkedin, FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs,
   FaPhp, FaMobileAlt, FaServer, FaGitAlt, FaFigma,
@@ -166,7 +167,7 @@ function App() {
       <div className="h-auto p-0 sm:p-8 border border-line mx-2 lg:mx-0">
         {/* TOP NAME */}
         <div className="flex flex-col md:flex-row justify-center items-center mt-6 md:mt-10 gap-6 md:gap-10 text-text-body">
-          <div>
+          <Reveal><div>
             <motion.img
               initial={{y:20,opacity:0}}
               animate={{y:0, opacity:1}}
@@ -175,9 +176,9 @@ function App() {
               className="rounded-full border border-slate-300 aspect-square object-cover h-40 sm:h-52 md:h-72"
               alt="user"
             />
-          </div>
+          </div></Reveal>
 
-          <div className="space-y-2 flex flex-col items-center text-center md:items-start md:text-left">
+          <Reveal><div className="space-y-2 flex flex-col items-center text-center md:items-start md:text-left">
             <motion.p
               initial={{y:20, opacity: 0}}
               animate={{y:0, opacity:1}}
@@ -202,7 +203,7 @@ function App() {
               experiences.
             </motion.p>
 
-            <motion.div 
+           <Reveal> <motion.div 
               initial={{y:20, opacity: 0}}
               animate={{y:0, opacity:1}}
               transition={{duration:1, ease:"easeOut"}} 
@@ -294,12 +295,12 @@ function App() {
                   </span>
                 </motion.a>
               </div>
-            </motion.div>
-          </div>
+           </motion.div></Reveal>
+          </div></Reveal>
         </div>
 
         {/* GitHub Activity */}
-        <div className="mt-10 mx-2 lg:mt-20 lg:mx-16 font-roboto">
+        <Reveal><div className="mt-10 mx-2 lg:mt-20 lg:mx-16 font-roboto">
           <motion.p
             initial={{y:20,opacity:0}}
             animate={{y:0, opacity:1}}
@@ -313,18 +314,18 @@ function App() {
             GitHub Activity
           </motion.p>
           <GitHubActivity theme={theme} />
-        </div>
+        </div></Reveal>
       </div>
 
       {/* About Me Section */}
       <div className="border border-line py-8 lg:py-16 flex mx-2 lg:mx-0">
         <div className="mx-2 mt-5 lg:mx-24 font-roboto">
-          <p className="text-body">About</p>
-          <p className="text-text-body lg:text-2xl font-google-sans font-bold">About Me</p>
+          <Reveal><p className="text-body">About</p></Reveal>
+          <Reveal><p className="text-text-body lg:text-2xl font-google-sans font-bold">About Me</p></Reveal>
           <div className="mt-6 space-y-10">
-            <p>I'm currently a 4th-year Bachelor of Science in Information Technology student who is interested in exploring the world of web development.</p>
-            <p>I enjoy learning how websites and web applications work, from creating user-friendly interfaces to understanding the logic and systems behind them. I'm currently developing my skills in both frontend and backend technologies and looking forward to discovering more along the way.</p>
-            <p>As someone who is still beginning my journey in the field, I believe that every project and learning opportunity is a chance to grow. I'm open to learning new technologies, gaining hands-on experience, and improving my abilities as I work toward becoming a well-rounded web developer.</p>
+            <Reveal><p>I'm currently a 4th-year Bachelor of Science in Information Technology student who is interested in exploring the world of web development.</p></Reveal>
+            <Reveal><p>I enjoy learning how websites and web applications work, from creating user-friendly interfaces to understanding the logic and systems behind them. I'm currently developing my skills in both frontend and backend technologies and looking forward to discovering more along the way.</p></Reveal>
+            <Reveal><p>As someone who is still beginning my journey in the field, I believe that every project and learning opportunity is a chance to grow. I'm open to learning new technologies, gaining hands-on experience, and improving my abilities as I work toward becoming a well-rounded web developer.</p></Reveal>
           </div>
         </div>
       </div>
@@ -386,15 +387,15 @@ function App() {
       {/* Projects Section */}
       <div id="projects" className="border border-line py-8 lg:py-16 flex flex-col mx-2 lg:mx-0">
         <div className="mx-2 mt-5 lg:mx-24 font-roboto">
-          <p className="text-body">Projects</p>
-          <p className="text-text-body lg:text-2xl font-google-sans font-bold">
+          <Reveal><p className="text-body">Projects</p></Reveal>
+          <Reveal><p className="text-text-body lg:text-2xl font-google-sans font-bold">
             Personal & School Projects
-          </p>
+          </p></Reveal>
         </div>
 
         <div className="mt-6 mx-2  lg:mx-24 lg:justify-evenly flex flex-col lg:flex-row lg:flex-wrap gap-4">
           {projects.map(({ title, description, image, url, github, label, tech }) => (
-            <div key={title} className="flex flex-col overflow-hidden rounded-2xl border border-line lg:w-sm">
+            <Reveal><div key={title} className="flex flex-col overflow-hidden rounded-2xl border border-line lg:w-sm">
               {/* Preview */}
               <div className="relative h-56 lg:h-48 overflow-hidden border-b border-line bg-line">
                 {image ? (
@@ -480,7 +481,7 @@ function App() {
                   )}
                 </div>
               </div>
-            </div>
+            </div></Reveal>
           ))}
         </div>
       </div>
