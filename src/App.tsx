@@ -46,7 +46,7 @@ const skillGroups: SkillGroup[] = [
       { name: "React", Icon: FaReact, color: "#61DAFB", level: "Familiar" },
       { name: "Vite", Icon: SiVite, color: "#646CFF", level: "Familiar" },
       { name: "Tailwind CSS", Icon: SiTailwindcss, color: "#06B6D4", level: "Familiar" },
-      { name: "Progressive Web Apps (PWA)", Icon: SiPwa, color: "#5A0FC8", level: "Learning" },
+      { name: "Progressive Web Apps (PWA)", Icon: SiPwa, color: "#5A0FC8", level: "Familiar" },
       { name: "Responsive Design", Icon: FaMobileAlt, level: "Familiar" },
     ],
   },
@@ -82,7 +82,7 @@ const skillGroups: SkillGroup[] = [
       { name: "Git/GitHub", Icon: FaGitAlt, color: "#F05032", level: "Familiar" },
       { name: "VS Code", Icon: VscVscode, color: "#007ACC", level: "Comfortable" },
       { name: "Figma", Icon: FaFigma, color: "#F24E1E", level: "Comfortable" },
-      { name: "phpMyAdmin", Icon: SiPhpmyadmin, color: "#6C78AF", level: "Familiar" },
+      { name: "phpMyAdmin", Icon: SiPhpmyadmin, color: "#6C78AF", level: "Learning" },
     ],
   },
   {
