@@ -4,6 +4,7 @@ import GitHubActivity from "./components/GitHubActivity";
 import { useTheme } from "./components/useTheme";
 import type { IconType } from "react-icons";
 import Contact from "./components/Contact";
+import {motion} from "motion/react";
 import {
   FaGithub, FaLinkedin, FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs,
   FaPhp, FaMobileAlt, FaServer, FaGitAlt, FaFigma,
@@ -166,7 +167,10 @@ function App() {
         {/* TOP NAME */}
         <div className="flex flex-col md:flex-row justify-center items-center mt-6 md:mt-10 gap-6 md:gap-10 text-text-body">
           <div>
-            <img
+            <motion.img
+              initial={{y:20,opacity:0}}
+              animate={{y:0, opacity:1}}
+              transition={{duration:1, ease:"easeOut"}} 
               src="profile.jpg"
               className="rounded-full border border-slate-300 aspect-square object-cover h-40 sm:h-52 md:h-72"
               alt="user"
@@ -174,28 +178,49 @@ function App() {
           </div>
 
           <div className="space-y-2 flex flex-col items-center text-center md:items-start md:text-left">
-            <p className="text-3xl md:text-4xl lg:text-5xl font-roboto font-bold">
+            <motion.p
+              initial={{y:20, opacity: 0}}
+              animate={{y:0, opacity:1}}
+              transition={{duration:1, ease:"easeOut"}}  
+              className="text-3xl md:text-4xl lg:text-5xl font-roboto font-bold">
               Hi, I'm Casey.
-            </p>
-            <p className="text-xl md:text-2xl lg:text-3xl text-[#56D364]">
+            </motion.p>
+            <motion.p
+              initial={{y:20, opacity: 0}}
+              animate={{y:0, opacity:1}}
+              transition={{duration:1, ease:"easeOut"}}  
+              className="text-xl md:text-2xl lg:text-3xl text-[#56D364]">
               Aspiring Full-Stack Developer.
-            </p>
-            <p className="text-base lg:text-xl">
+            </motion.p>
+            <motion.p
+              initial={{y:20, opacity: 0}}
+              animate={{y:0, opacity:1}}
+              transition={{duration:1, ease:"easeOut"}}  
+              className="text-base lg:text-xl">
               4th-year BSIT student passionate about building modern,
               <br className="hidden md:block" /> responsive and functional web
               experiences.
-            </p>
+            </motion.p>
 
-            <div className="mt-6 lg:mt-10 flex flex-wrap justify-center md:justify-start items-center gap-3">
-              <button className="hover:cursor-pointer inline-flex items-center gap-2 hover:text-green-500 text-base lg:text-lg py-1 px-3 bg-heading border border-heading font-normal rounded-full font-google-sans text-page">
+            <motion.div 
+              initial={{y:20, opacity: 0}}
+              animate={{y:0, opacity:1}}
+              transition={{duration:1, ease:"easeOut"}} 
+              className="mt-6 lg:mt-10 flex flex-wrap justify-center md:justify-start items-center gap-3">
+              <motion.a
+                href="#contact"
+                className="hover:cursor-pointer inline-flex items-center gap-2 hover:text-green-500 text-base lg:text-lg py-1 px-3 bg-heading border border-heading font-normal rounded-full font-google-sans text-page">
                 Get in touch
                 <MoveRight size={19} />
-              </button>
+              </motion.a>
 
-              <a
+              <motion.a
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.9, y: 1 }}
+                transition={{ type: "spring", stiffness:300, damping: 15 }}
                 href="/resume.pdf"
                 download="Casey-Resume.pdf"
-                className="group relative hover:bg-body hover:cursor-pointer inline-flex items-center hover:text-green-500 gap-2 text-base lg:text-lg py-1 px-3 bg-transparent border border-text-body font-google-sans font-normal rounded-full"
+                className="group relative  hover:cursor-pointer inline-flex items-center hover:text-green-500 gap-2 text-base lg:text-lg py-1 px-3 bg-transparent border border-text-body font-google-sans font-normal rounded-full"
               >
                 <FileUser size={19} />
                 Resume/CV
@@ -206,15 +231,18 @@ function App() {
                   <span className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-white" />
                   Download Resume
                 </span>
-              </a>
+              </motion.a>
 
               <div className="flex w-full md:w-auto justify-center md:justify-start gap-3">
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.9, y: 1 }}
+                  transition={{ type: "spring", stiffness:300, damping: 15 }}
                   href="https://github.com/Kakaiii21"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="GitHub"
-                  className="group relative hover:bg-body inline-flex items-center justify-center h-9 w-9 rounded-full border border-text-body hover:cursor-pointer"
+                  className="group relative  inline-flex items-center justify-center h-9 w-9 rounded-full border border-text-body hover:cursor-pointer"
                 >
                   <FaGithub size={19} />
                   <span
@@ -224,14 +252,17 @@ function App() {
                     <span className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-white" />
                     View GitHub
                   </span>
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.9, y: 1 }}
+                  transition={{ type: "spring", stiffness:300, damping: 15 }}
                   href="https://www.linkedin.com/in/casey-undefined-396b62446/"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="LinkedIn"
-                  className="group relative hover:bg-body inline-flex items-center justify-center h-9 w-9 rounded-full border border-text-body hover:cursor-pointer"
+                  className="group relative  inline-flex items-center justify-center h-9 w-9 rounded-full border border-text-body hover:cursor-pointer"
                 >
                   <FaLinkedin size={19} />
                   <span
@@ -241,14 +272,17 @@ function App() {
                     <span className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-white" />
                     View LinkedIn
                   </span>
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.9, y: 1 }}
+                  transition={{ type: "spring", stiffness:300, damping: 15 }}
                   href="https://mail.google.com/mail/?view=cm&fs=1&to=caseypdellamas@gmail.com"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Email"
-                  className="group relative hover:bg-body inline-flex items-center justify-center h-9 w-9 rounded-full border border-text-body hover:cursor-pointer"
+                  className="group relative  inline-flex items-center justify-center h-9 w-9 rounded-full border border-text-body hover:cursor-pointer"
                 >
                   <Mail size={19} />
                   <span
@@ -258,18 +292,26 @@ function App() {
                     <span className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rotate-45 bg-white" />
                     Send Email
                   </span>
-                </a>
+                </motion.a>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* GitHub Activity */}
         <div className="mt-10 mx-2 lg:mt-20 lg:mx-16 font-roboto">
-          <p className="text-body">Featured</p>
-          <p className="text-text-body lg:text-2xl font-google-sans font-bold">
+          <motion.p
+            initial={{y:20,opacity:0}}
+            animate={{y:0, opacity:1}}
+            transition={{duration:1, ease:"easeOut"}} 
+            className="text-body">Featured</motion.p>
+          <motion.p
+            initial={{y:20,opacity:0}}
+            animate={{y:0, opacity:1}}
+            transition={{duration:1, ease:"easeOut"}} 
+            className="text-text-body lg:text-2xl font-google-sans font-bold">
             GitHub Activity
-          </p>
+          </motion.p>
           <GitHubActivity theme={theme} />
         </div>
       </div>
