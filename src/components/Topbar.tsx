@@ -2,6 +2,7 @@ import type { Theme } from "./useTheme";
 import { MdLightMode, MdDarkMode } from "react-icons/md";
 import {motion} from "motion/react";
 import AnimatedButton from "./AnimatedButton";
+import Reveal from "./Reveal";
 
 
 type TopbarProps = {
@@ -13,7 +14,7 @@ function Topbar({ theme, toggle }: TopbarProps) {
 
   return (
     <div className="border flex border-line justify-between px-3 lg:px-10 text-text-body font-roboto items-center h-20">
-        <motion.div 
+        <Reveal><motion.div 
             className="flex"        
         >
             <motion.p
@@ -28,8 +29,8 @@ function Topbar({ theme, toggle }: TopbarProps) {
                 animate={{y: 0 , opacity:1}}
                 transition={{duration:1}}
             >.dev</motion.p> 
-        </motion.div>
-        <motion.div 
+        </motion.div></Reveal>
+        <Reveal><motion.div 
             initial={{x:30, opacity:0}}
             animate={{x: 0,opacity:1}}
             transition={{duration: 1}}
@@ -64,7 +65,7 @@ function Topbar({ theme, toggle }: TopbarProps) {
                 </>
             )}
             </AnimatedButton>
-        </motion.div>
+        </motion.div></Reveal>
     </div>
   )
 }

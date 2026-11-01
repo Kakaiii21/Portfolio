@@ -333,29 +333,29 @@ function App() {
       {/* Skills And Tools Section */}
       <div className="border border-line py-8 lg:py-16 flex mx-2 lg:mx-0">
         <div className="flex-1 mx-2 mt-5 lg:mx-24 font-roboto">
-          <p className="text-body">Skills</p>
-          <p className="text-text-body lg:text-2xl font-google-sans font-bold">
+          <Reveal><p className="text-body">Skills</p></Reveal>
+          <Reveal><p className="text-text-body lg:text-2xl font-google-sans font-bold">
             Skills & Tools
-          </p>
+          </p></Reveal>
 
-          <p className="mt-2 text-body">
+          <Reveal><p className="mt-2 text-body">
             I'm still growing as a developer. These are the tools I've used in my
             projects, marked by how confident I am with each.
-          </p>
+          </p></Reveal>
 
           {/* Legend */}
-          <div className="mt-3 flex flex-wrap gap-4 text-sm text-body">
+          <Reveal><div className="mt-3 flex flex-wrap gap-4 text-sm text-body">
             {(Object.keys(levelStyles) as Level[]).map((level) => (
               <span key={level} className="inline-flex items-center gap-2">
                 <span className={`h-2 w-2 rounded-full ${levelStyles[level]}`} />
                 {level}
               </span>
             ))}
-          </div>
+          </div></Reveal>
 
           <div className="mt-6 space-y-8">
             {skillGroups.map(({ title, items }) => (
-              <div key={title}>
+              <Reveal><div key={title}>
                 <p className="text-body mb-3">{title}</p>
 
                 <div className="flex flex-wrap gap-3">
@@ -378,7 +378,7 @@ function App() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div></Reveal>
             ))}
           </div>
         </div>
