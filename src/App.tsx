@@ -1,5 +1,6 @@
 import Topbar from "./components/Topbar";
 import { FileUser, MoveRight, Mail, ArrowUpRight } from "lucide-react";
+import Certifications from "./components/Certifications";
 import GitHubActivity from "./components/GitHubActivity";
 import { useTheme } from "./components/useTheme";
 import type { IconType } from "react-icons";
@@ -385,6 +386,8 @@ function App() {
         </div>
       </div>
 
+      {/* Certifications Section */}
+      <Certifications />
       {/* Projects Section */}
       <div id="projects" className="border border-line py-8 lg:py-16 flex flex-col mx-2 lg:mx-0">
         <div className="mx-2 mt-5 lg:mx-24 font-roboto">
