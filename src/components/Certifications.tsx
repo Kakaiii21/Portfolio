@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { Award } from "lucide-react";
-import Reveal from "./Reveal";
 
+import Reveal from "./Reveal";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { Award, X } from "lucide-react";
 type Certification = {
   title: string;
   issuer: string;
@@ -30,9 +31,14 @@ const certifications: Certification[] = [
 function Certifications() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [pinned, setPinned] = useState<string | null>(null);
+  const [zoomed, setZoomed] = useState<string | null>(null); // moved up
 
+  const activeTitle = hovered ?? pinned;
+  const zoomedCert = certifications.find((c) => c.title === zoomed);
+
+  // Close the pinned card on Escape / outside click (disabled while zoomed)
   useEffect(() => {
-    if (!pinned) return;
+    if (!pinned || zoomed) return;
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setPinned(null);
@@ -51,8 +57,27 @@ function Certifications() {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
     };
-  }, [pinned]);
-    const activeTitle = hovered ?? pinned;
+  }, [pinned, zoomed]); // fixed: both in one array
+
+  // Lightbox: Escape to close + lock body scroll
+  useEffect(() => {
+    if (!zoomed) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoomed(null);
+    };
+    document.addEventListener("keydown", onKeyDown);
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [zoomed]);
+
+
 return (
   <div id="certifications" className="border border-line py-8 lg:py-16 flex mx-2 lg:mx-0">
     <div className="flex-1 mx-2 mt-5 lg:mx-24 font-roboto">
@@ -118,45 +143,94 @@ return (
                         isPinned ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                       }`}
                     >
-                      <div className="overflow-hidden">
-                        <img
-                          src={image}
-                          alt={`${title} certificate`}
-                          className="mt-3 w-full rounded-xl border border-line"
-                        />
-                      </div>
+<div className="overflow-hidden">
+  <button
+    type="button"
+    tabIndex={isPinned ? 0 : -1}
+    onClick={() => setZoomed(title)}
+    className="relative mt-3 block w-full cursor-zoom-in"
+  >
+    <img
+      src={image}
+      alt={`${title} certificate`}
+      className="w-full rounded-xl border border-line"
+    />
+    <span className="absolute bottom-2 right-2 rounded-md bg-black/60 px-2 py-1 text-xs text-white">
+      Tap to enlarge
+    </span>
+  </button>
+</div>
+
                     </div>
+
+                    
                   )}
-                </div>
+                </div>{zoomedCert?.image &&
+  createPortal(
+    <div
+      data-cert-card
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${zoomedCert.title} certificate`}
+      onClick={() => setZoomed(null)}
+      className="fixed inset-0 z-50 bg-black/85"
+    >
+      <button
+        type="button"
+        aria-label="Close"
+        onClick={() => setZoomed(null)}
+        className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+      >
+        <X size={24} />
+      </button>
+
+      <div className="flex h-full w-full items-center overflow-auto p-4 sm:justify-center">
+        <img
+          src={zoomedCert.image}
+          alt={`${zoomedCert.title} certificate`}
+          onClick={(e) => e.stopPropagation()}
+          className="w-[900px] max-w-none shrink-0 rounded-lg sm:max-h-full sm:w-auto sm:max-w-full sm:object-contain"
+        />
+      </div>
+    </div>,
+    document.body
+  )}
               </Reveal>
             );
           })}
         </div>
 
         {/* Right: desktop-only preview panel */}
-        <div
-          data-cert-card
-          className="relative hidden aspect-[3/2] w-full overflow-hidden rounded-2xl border border-line bg-line/40 lg:block"
-        >
-          {certifications.map(({ title, image }) =>
-            image ? (
-              <img
-                key={title}
-                src={image}
-                alt={`${title} certificate`}
-                className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-200 ${
-                  activeTitle === title ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            ) : null
-          )}
+<button
+  type="button"
+  data-cert-card
+  disabled={!activeTitle}
+  onClick={() => activeTitle && setZoomed(activeTitle)}
+  className="relative hidden aspect-[3/2] w-full cursor-zoom-in overflow-hidden rounded-2xl border border-line bg-line/40 disabled:cursor-default lg:block"
+>
+  {certifications.map(({ title, image }) =>
+    image ? (
+      <img
+        key={title}
+        src={image}
+        alt={`${title} certificate`}
+        className={`absolute inset-0 h-full w-full object-contain transition-opacity duration-200 ${
+          activeTitle === title ? "opacity-100" : "opacity-0"
+        }`}
+      />
+    ) : null
+  )}
 
-          {!activeTitle && (
-            <p className="absolute inset-0 flex items-center justify-center px-6 text-center text-sm text-body">
-              Hover or click a certificate to preview it here
-            </p>
-          )}
-        </div>
+  {activeTitle ? (
+    <span className="absolute bottom-2 right-2 rounded-md bg-black/60 px-2 py-1 text-xs text-white">
+      Click to enlarge
+    </span>
+  ) : (
+    <span className="absolute inset-0 flex items-center justify-center px-6 text-center text-sm text-body">
+      Hover or click a certificate to preview it here
+    </span>
+  )}
+</button>
       </div>
     </div>
   </div>
