@@ -36,7 +36,6 @@ function Certifications() {
   const activeTitle = hovered ?? pinned;
   const zoomedCert = certifications.find((c) => c.title === zoomed);
 
-  // Close the pinned card on Escape / outside click (disabled while zoomed)
   useEffect(() => {
     if (!pinned || zoomed) return;
 
@@ -57,9 +56,9 @@ function Certifications() {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
     };
-  }, [pinned, zoomed]); // fixed: both in one array
+  }, [pinned, zoomed]); 
 
-  // Lightbox: Escape to close + lock body scroll
+
   useEffect(() => {
     if (!zoomed) return;
 
@@ -143,58 +142,59 @@ return (
                         isPinned ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                       }`}
                     >
-<div className="overflow-hidden">
-  <button
-    type="button"
-    tabIndex={isPinned ? 0 : -1}
-    onClick={() => setZoomed(title)}
-    className="relative mt-3 block w-full cursor-zoom-in"
-  >
-    <img
-      src={image}
-      alt={`${title} certificate`}
-      className="w-full rounded-xl border border-line"
-    />
-    <span className="absolute bottom-2 right-2 rounded-md bg-black/60 px-2 py-1 text-xs text-white">
-      Tap to enlarge
-    </span>
-  </button>
-</div>
+                    <div className="overflow-hidden">
+                    <button
+                        type="button"
+                        tabIndex={isPinned ? 0 : -1}
+                        onClick={() => setZoomed(title)}
+                        className="relative mt-3 block w-full cursor-zoom-in"
+                    >
+                        <img
+                        src={image}
+                        alt={`${title} certificate`}
+                        className="w-full rounded-xl border border-line"
+                        />
+                        <span className="absolute bottom-2 right-2 rounded-md bg-black/60 px-2 py-1 text-xs text-white">
+                        Tap to enlarge
+                        </span>
+                    </button>
+                    </div>
 
                     </div>
 
                     
                   )}
-                </div>{zoomedCert?.image &&
-  createPortal(
-    <div
-      data-cert-card
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${zoomedCert.title} certificate`}
-      onClick={() => setZoomed(null)}
-      className="fixed inset-0 z-50 bg-black/85"
-    >
-      <button
-        type="button"
-        aria-label="Close"
-        onClick={() => setZoomed(null)}
-        className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
-      >
-        <X size={24} />
-      </button>
+                </div>
+    {zoomedCert?.image &&
+        createPortal(
+            <div
+            data-cert-card
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${zoomedCert.title} certificate`}
+            onClick={() => setZoomed(null)}
+            className="fixed inset-0 z-50 bg-black/85"
+            >
+            <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setZoomed(null)}
+                className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+            >
+                <X size={24} />
+            </button>
 
-      <div className="flex h-full w-full items-center overflow-auto p-4 sm:justify-center">
-        <img
-          src={zoomedCert.image}
-          alt={`${zoomedCert.title} certificate`}
-          onClick={(e) => e.stopPropagation()}
-          className="w-[900px] max-w-none shrink-0 rounded-lg sm:max-h-full sm:w-auto sm:max-w-full sm:object-contain"
-        />
-      </div>
-    </div>,
-    document.body
-  )}
+            <div className="flex h-full w-full items-center overflow-auto p-4 sm:justify-center">
+                <img
+                src={zoomedCert.image}
+                alt={`${zoomedCert.title} certificate`}
+                onClick={(e) => e.stopPropagation()}
+                className="w-[900px] max-w-none shrink-0 rounded-lg sm:max-h-full sm:w-auto sm:max-w-full sm:object-contain"
+                />
+            </div>
+            </div>,
+            document.body
+        )}
               </Reveal>
             );
           })}
