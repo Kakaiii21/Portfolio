@@ -219,7 +219,8 @@ function App() {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.9, y: 1 }}
                 transition={{ type: "spring", stiffness:300, damping: 15 }}
-                href="/resume.pdf"
+                href="/Casey-Resume.pdf"
+                target="_blank"
                 download="Casey-Resume.pdf"
                 className="group relative  hover:cursor-pointer inline-flex items-center hover:text-green-500 gap-2 text-base lg:text-lg py-1 px-3 bg-transparent border border-text-body font-google-sans font-normal rounded-full"
               >
